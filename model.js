@@ -28,6 +28,7 @@ function Model (koop) {}
 
 function formatSQL(req) {
   const sql = squel.select()
+    console.log(req.query.columns)
     .field(req.query.columns)
     // .field(`ST_Simplify(ST_Transform(${'geom'}, 4326), 0.000001) as geom`)
     .field(`ST_Transform(${'geom'}, 4326) as geom`)
