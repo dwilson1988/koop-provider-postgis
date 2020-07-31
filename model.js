@@ -31,7 +31,7 @@ function formatSQL(req) {
     .field(req.query.columns)
     // .field(`ST_Simplify(ST_Transform(${'geom'}, 4326), 0.000001) as geom`)
     //.field(`ST_Transform(${'geom'}, 4326) as geom`)
-    .field("geom")
+    //.field("geom")
     .from(req.query.table)
     // .where(req.query.filter)
     // .limit(req.query.limit)
