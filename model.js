@@ -26,13 +26,13 @@ function Model (koop) {}
 // req.params.layer
 // req.params.method
 
-function formatSQL(req) {
+function formatSQL(req, id) {
   const sql = squel.select()
-    .field(req.query.columns)
+    .field("* EXCEPT geom")
     //.field(`ST_Simplify(ST_Transform(${'geom'}, 4326), 0.000001) as geom`)
     .field(`ST_Transform(ST_SetSRID(${'geom'}, 2272), 4326) as geom`)
     //.field("geom")
-    .from(req.query.table)
+    .from(id)
     // .where(req.query.filter)
     // .limit(req.query.limit)
     ;
@@ -55,10 +55,11 @@ function formatSQL(req) {
 }
 
 Model.prototype.getData = function (req, callback) {
-  console.log('req:', req);
+  const { params: { host, id } } = req
+  
   let geojson = '';
   let db = pgp(config.db.postgis); //this is a specific config
-  console.log(formatSQL(req));
+  console.log(formatSQL(req, id));
   db
   .query(formatSQL(req))
   .then(function(data) {
