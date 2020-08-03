@@ -61,7 +61,7 @@ Model.prototype.getData = function (req, callback) {
   let db = pgp(config.db.postgis); //this is a specific config
   console.log(formatSQL(req, layer));
   db
-  .query(formatSQL(req))
+  .query(formatSQL(req, layer))
   .then(function(data) {
     dbgeo.parse(data, {
       outputFormat: 'geojson',
