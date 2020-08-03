@@ -55,7 +55,7 @@ function formatSQL(req) {
 }
 
 Model.prototype.getData = function (req, callback) {
-  console.log('req:', req.query);
+  console.log('req:', req);
   let geojson = '';
   let db = pgp(config.db.postgis); //this is a specific config
   console.log(formatSQL(req));
