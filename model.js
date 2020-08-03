@@ -28,9 +28,9 @@ function Model (koop) {}
 
 function formatSQL(req, id) {
   const sql = squel.select()
-    .field("* EXCEPT geom")
     //.field(`ST_Simplify(ST_Transform(${'geom'}, 4326), 0.000001) as geom`)
     .field(`ST_Transform(ST_SetSRID(${'geom'}, 2272), 4326) as geom`)
+    .field("* EXCEPT geom")
     //.field("geom")
     .from(id)
     // .where(req.query.filter)
